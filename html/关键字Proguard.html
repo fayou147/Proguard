@@ -1,0 +1,460 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Proguard</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<style type="text/css">
+/* GitHub stylesheet for MarkdownPad (http://markdownpad.com) */
+/* Author: Nicolas Hery - http://nicolashery.com */
+/* Version: b13fe65ca28d2e568c6ed5d7f06581183df8f2ff */
+/* Source: https://github.com/nicolahery/markdownpad-github */
+
+/* RESET
+=============================================================================*/
+
+html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas, details, embed, figure, figcaption, footer, header, hgroup, menu, nav, output, ruby, section, summary, time, mark, audio, video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+
+/* BODY
+=============================================================================*/
+
+body {
+  font-family: Helvetica, arial, freesans, clean, sans-serif;
+  font-size: 14px;
+  line-height: 1.6;
+  color: #333;
+  background-color: #fff;
+  padding: 20px;
+  max-width: 960px;
+  margin: 0 auto;
+}
+
+body>*:first-child {
+  margin-top: 0 !important;
+}
+
+body>*:last-child {
+  margin-bottom: 0 !important;
+}
+
+/* BLOCKS
+=============================================================================*/
+
+p, blockquote, ul, ol, dl, table, pre {
+  margin: 15px 0;
+}
+
+/* HEADERS
+=============================================================================*/
+
+h1, h2, h3, h4, h5, h6 {
+  margin: 20px 0 10px;
+  padding: 0;
+  font-weight: bold;
+  -webkit-font-smoothing: antialiased;
+}
+
+h1 tt, h1 code, h2 tt, h2 code, h3 tt, h3 code, h4 tt, h4 code, h5 tt, h5 code, h6 tt, h6 code {
+  font-size: inherit;
+}
+
+h1 {
+  font-size: 28px;
+  color: #000;
+}
+
+h2 {
+  font-size: 24px;
+  border-bottom: 1px solid #ccc;
+  color: #000;
+}
+
+h3 {
+  font-size: 18px;
+}
+
+h4 {
+  font-size: 16px;
+}
+
+h5 {
+  font-size: 14px;
+}
+
+h6 {
+  color: #777;
+  font-size: 14px;
+}
+
+body>h2:first-child, body>h1:first-child, body>h1:first-child+h2, body>h3:first-child, body>h4:first-child, body>h5:first-child, body>h6:first-child {
+  margin-top: 0;
+  padding-top: 0;
+}
+
+a:first-child h1, a:first-child h2, a:first-child h3, a:first-child h4, a:first-child h5, a:first-child h6 {
+  margin-top: 0;
+  padding-top: 0;
+}
+
+h1+p, h2+p, h3+p, h4+p, h5+p, h6+p {
+  margin-top: 10px;
+}
+
+/* LINKS
+=============================================================================*/
+
+a {
+  color: #4183C4;
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+/* LISTS
+=============================================================================*/
+
+ul, ol {
+  padding-left: 30px;
+}
+
+ul li > :first-child, 
+ol li > :first-child, 
+ul li ul:first-of-type, 
+ol li ol:first-of-type, 
+ul li ol:first-of-type, 
+ol li ul:first-of-type {
+  margin-top: 0px;
+}
+
+ul ul, ul ol, ol ol, ol ul {
+  margin-bottom: 0;
+}
+
+dl {
+  padding: 0;
+}
+
+dl dt {
+  font-size: 14px;
+  font-weight: bold;
+  font-style: italic;
+  padding: 0;
+  margin: 15px 0 5px;
+}
+
+dl dt:first-child {
+  padding: 0;
+}
+
+dl dt>:first-child {
+  margin-top: 0px;
+}
+
+dl dt>:last-child {
+  margin-bottom: 0px;
+}
+
+dl dd {
+  margin: 0 0 15px;
+  padding: 0 15px;
+}
+
+dl dd>:first-child {
+  margin-top: 0px;
+}
+
+dl dd>:last-child {
+  margin-bottom: 0px;
+}
+
+/* CODE
+=============================================================================*/
+
+pre, code, tt {
+  font-size: 12px;
+  font-family: Consolas, "Liberation Mono", Courier, monospace;
+}
+
+code, tt {
+  margin: 0 0px;
+  padding: 0px 0px;
+  white-space: nowrap;
+  border: 1px solid #eaeaea;
+  background-color: #f8f8f8;
+  border-radius: 3px;
+}
+
+pre>code {
+  margin: 0;
+  padding: 0;
+  white-space: pre;
+  border: none;
+  background: transparent;
+}
+
+pre {
+  background-color: #f8f8f8;
+  border: 1px solid #ccc;
+  font-size: 13px;
+  line-height: 19px;
+  overflow: auto;
+  padding: 6px 10px;
+  border-radius: 3px;
+}
+
+pre code, pre tt {
+  background-color: transparent;
+  border: none;
+}
+
+kbd {
+    -moz-border-bottom-colors: none;
+    -moz-border-left-colors: none;
+    -moz-border-right-colors: none;
+    -moz-border-top-colors: none;
+    background-color: #DDDDDD;
+    background-image: linear-gradient(#F1F1F1, #DDDDDD);
+    background-repeat: repeat-x;
+    border-color: #DDDDDD #CCCCCC #CCCCCC #DDDDDD;
+    border-image: none;
+    border-radius: 2px 2px 2px 2px;
+    border-style: solid;
+    border-width: 1px;
+    font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+    line-height: 10px;
+    padding: 1px 4px;
+}
+
+/* QUOTES
+=============================================================================*/
+
+blockquote {
+  border-left: 4px solid #DDD;
+  padding: 0 15px;
+  color: #777;
+}
+
+blockquote>:first-child {
+  margin-top: 0px;
+}
+
+blockquote>:last-child {
+  margin-bottom: 0px;
+}
+
+/* HORIZONTAL RULES
+=============================================================================*/
+
+hr {
+  clear: both;
+  margin: 15px 0;
+  height: 0px;
+  overflow: hidden;
+  border: none;
+  background: transparent;
+  border-bottom: 4px solid #ddd;
+  padding: 0;
+}
+
+/* TABLES
+=============================================================================*/
+
+table th {
+  font-weight: bold;
+}
+
+table th, table td {
+  border: 1px solid #ccc;
+  padding: 6px 13px;
+}
+
+table tr {
+  border-top: 1px solid #ccc;
+  background-color: #fff;
+}
+
+table tr:nth-child(2n) {
+  background-color: #f8f8f8;
+}
+
+/* IMAGES
+=============================================================================*/
+
+img {
+  max-width: 100%
+}
+</style>
+</head>
+<body>
+<h1>Proguard的使用</h1>
+<p>我们使用AS新建工程的时候，都会在module的build文件中默认出现</p>
+<pre><code> buildTypes {
+    release {
+        minifyEnabled false
+        proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+    }
+}`
+</code></pre>
+
+<p>当我们需要对项目进行混淆的时候，只需要将minifyEnabled设置为true即可。同时还可以设置<code>shrinkResources true</code>用于剔除项目中无用的资源文件。</p>
+<h2>proguard潜规则</h2>
+<p>proguard是有默认的规则的，这些规则都是放置在sdk/tools/proguard/proguard-android.txt中，我们自己项目中需要混淆的都写在我们自己的项目中的proguard-rules.pro文件里面</p>
+<h3>主要规则</h3>
+<ul>
+<li>-keepattributes * Annotation * 保留注解中的参数</li>
+<li>keep 保留包/类</li>
+<li>
+<code>-keepclasseswithmembernames class * {
+native &lt;methods&gt;;
+}</code>
+不混淆所有包括native方法的类。
+</li>
+<li>
+<code>-keepclassmembers class * extends android.app.Activity 		{
+public void *(android.view.View);
+}</code>不混淆任何View中的set和get方法，确保属性动画可以正常。
+</li>
+<li>
+<code>-keepclassmembers class * extends     android.app.Activity {
+public void *(android.view.View);
+}</code>保留所有继承自Activity的类。即是所有的activity都不被混淆。
+</li>
+<li>
+<code>-keepclassmembers enum * {
+public static **[] values();
+public static ** valueOf(java.lang.String);
+}</code>所有枚举类型的都不混淆。
+</li>
+<li>
+<code>-keepclassmembers class * implements android.os.Parcelable {
+public static final android.os.Parcelable$Creator CREATOR;
+}</code>所有序列化的类中的Creator方法不被混淆
+</li>
+<li>
+<code>-keepclassmembers class **.R$* {
+public static &lt;fields&gt;;
+}</code>不混淆R文件中的静态字段，
+</li>
+<li><code>-dontwarn android.support.**</code>不用warn警告有关android.support包下的内容。</li>
+<li>
+<p>不混淆android.support.annotation.Keep相关的类，方法，成员变量，初始化</p>
+<pre><code>`-keep class android.support.annotation.Keep
+
+-keep @android.support.annotation.Keep class * {*;}
+
+-keepclasseswithmembers class * {
+ @android.support.annotation.Keep &lt;methods&gt;;
+}
+
+-keepclasseswithmembers class * {
+  @android.support.annotation.Keep &lt;fields&gt;;
+}
+
+-keepclasseswithmembers class * {
+  @android.support.annotation.Keep &lt;init&gt;(...);
+}`
+</code></pre>
+
+</li>
+<li>
+关于几个关键字
+<ul>
+<li>-dontusemixedcaseclassnames 混淆时不适用大小写混淆</li>
+<li>-dontskipnonpubliclibraryclasses 不跳过library中的非public类</li>
+<li>-verbose  不打因详细的混淆信息</li>
+<li>-dontoptimize 不对混淆文件进行大小优化，</li>
+<li>-dontpreverify 不进行检验检查</li>
+</ul>
+</li>
+</ul>
+<p><b>以上是关于android sdk中默认的proguard规则的介绍。接下来是对文档的翻译<a href="http://proguard.sourceforge.net/index.html#manual/usage.html">http://proguard.sourceforge.net/index.html#manual/usage.html</a>主要是规则相关的</b></p>
+<h3>关于proguard.pro文件的编辑规则</h3>
+<ol>
+<li>可以使用#来注释一整行</li>
+<li>单词和分隔符之间的空格会自动忽略，特殊需要空格的用单引号或者双引号。</li>
+<li>配置的参数一般顺序不分先后</li>
+</ol>
+<h3>Input/Output Options 输入输出相关</h3>
+<ol>
+<li>include filename 读取制定的文件</li>
+<li>basedirectory 递归读取文件目录下的内容</li>
+<li>injars CLASS_PATH 指定读入的jar的路径</li>
+<li>outjars	CLASS_PATH 指定输出的jar的路径</li>
+<li>libraryjars CLASS_PATH 指定库文件的路径</li>
+<li>skipnonpubliclibraryclasses 指定跳过的非公共类</li>
+<li>dontskipnonpubliclibraryclasses 指定不跳过的非公共类</li>
+<li>dontskipnonpubliclibraryclassmembers 指定不忽略的库类的成员变量和方法</li>
+<li>keepdirectories [directory_filter]  指定输出jars的目录，默认是删除的</li>
+<li>target version 指定处理文件的版本</li>
+<li>比较输入，输出文件的时间戳</li>
+</ol>
+<h3>Keep Options  保留，不混淆</h3>
+<ol>
+<li><b>keep [,modifier,...] class_specification 保留指定的类和成员变量，以保存的代码为准</b></li>
+<li>keepclassmembers [,modifier,...] class_specification 指定保留类成员</li>
+<li>keepclasseswithmembers [,modifier,...] class_specification 在类和成员都存在的情况下保留</li>
+<li>keepnames class_specification 指定要保留的类的成员</li>
+<li>keepclassmembernames class_specification 指定保留的成员如果在代码压缩的时候没有被移除</li>
+<li>keepclasseswithmembernames class_specification 指定在压缩代码的时候保留下来的类和成员</li>
+<li>printseeds [filename] 详尽的列出要匹配的类和成员到指定的输出活输出文件</li>
+</ol>
+<h3>Shrinking Options 压缩</h3>
+<ol>
+<li>dontshrink 指定不压缩的类文件</li>
+<li>printusage [filename] 无用代码（dead code）输出到指定列表</li>
+<li>whyareyoukeeping class_specification 给出指定的类和成员在指定的压缩级别中为什么别压缩</li>
+</ol>
+<h3>Optimization Options  优化</h3>
+<ol>
+<li>dontoptimize 指定不优化的类文件，默认byte级优化</li>
+<li>optimizations optimization_filter 指定在详细的优化级别中优化与否</li>
+<li>assumenosideeffects class_specification 指定即使删除也对项目没有影响的方法。例如使用该配置删除日志代码</li>
+<li>allowaccessmodification 用来进一步优化，但是不建议使用，某些虚拟机将回出问题</li>
+<li>mergeinterfacesaggressively 指定接口合并，更加不建议使用，有些虚拟机不能处理所产生的代码</li>
+</ol>
+<h3>Obfuscation Options 混淆</h3>
+<ol>
+<li>dontobfuscate 指定不混淆输入的类</li>
+<li>printmapping [filename]  指定对应文件的新名字</li>
+<li>applymapping filename 指定要重新使用的特定的名字 </li>
+<li>applymapping filename 指定混淆文件和方法的文本文件</li>
+<li>obfuscationdictionary filename 指定用于混淆的文件，只有混淆的时候适用</li>
+<li>classobfuscationdictionary filename 类似上一条</li>
+<li>packageobfuscationdictionary filename 类似上一条</li>
+<li>overloadaggressively  指定混淆可以重名，多个字段和方法可以重名只要参数和返回值类型不同</li>
+<li>useuniqueclassmembernames 指定相同的名字适用相同的混淆名字，不同的混淆名称分配给不同的成员</li>
+<li>dontusemixedcaseclassnames 混淆不使用大小写混合的方式</li>
+<li>keeppackagenames [package_filter] 指定包不混淆</li>
+<li>flattenpackagehierarchy [package_name]  指定包移动到一个指定的父包中以减少处理后的代码。</li>
+<li>repackageclasses [package_name] 指定类移动到一个指定的包中。</li>
+<li><b>keepattributes [attribute_filter] 指定要保留的属性</b></li>
+<li>keepparameternames 指定不混淆的方法的参数名和类型</li>
+<li>renamesourcefileattribute [string] 指定一个常量字符放在SourceFile 中</li>
+<li>adaptclassstrings [class_filter] 指定类名字符串常量被混淆</li>
+<li>adaptresourcefilenames [ FILE_FILTER ] 指定资源文件重命名</li>
+<li>adaptresourcefilecontents [ FILE_FILTER ] 指定内容会更新的资源常量</li>
+</ol>
+<h3>Preverification Options 校验</h3>
+<ol>
+<li>dontpreverify 指定不校验处理的类</li>
+<li>microedition 指定处理的文件是针对Java Micro Edition</li>
+</ol>
+<h3>General Options 普通</h3>
+<ol>
+<li>verbose 打印所有信息</li>
+<li>dontnote [class_filter] 指定不打印的配置潜在的错误和遗漏</li>
+<li><b>dontwarn [class_filter] 指定不警告未解决的参考和其他问题</b></li>
+<li>ignorewarnings 指定打印所有未解决的参考和问题，但是继续运行</li>
+<li>printconfiguration [filename] 打印出整个解析出来的配置，包括文件和变量</li>
+<li>dump [filename] 指定输出类文件的内部结构
+ dontwarn</li>
+</ol>
+
+</body>
+</html>
+<!-- This document was created with MarkdownPad, the Markdown editor for Windows (http://markdownpad.com) -->
